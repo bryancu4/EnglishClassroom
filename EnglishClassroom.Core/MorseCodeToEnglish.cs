@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace EnglishClassroom.Core
@@ -32,6 +31,16 @@ namespace EnglishClassroom.Core
                 result = !m.Groups.Cast<Group>().Any(g => g.Length % 3 != 0);
             }
 
+            return result;
+        }
+
+        public bool CanTranslateText(string textToTranslate)
+        {
+            var result = false;
+            if (!string.IsNullOrEmpty(textToTranslate))
+            {
+                result = textToTranslate.Split(new char[] { ' ', '.', '-' }, StringSplitOptions.RemoveEmptyEntries).Length == 0;
+            }
             return result;
         }
     }

@@ -4,5 +4,6 @@
     {
         string Translate(string textToTranslate);
         bool IsValid(string textToTranslate);
+        bool CanTranslateText(string textToTranslate);
     }
 }

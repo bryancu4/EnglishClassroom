@@ -10,7 +10,7 @@ namespace EnglishClassroom.Core.Tests
         {
             var expected = "the wizard quickly jinxed the gnomes before they vaporized.";
             var textToTranslate = "- .... .   .-- .. --.. .- .-. -..   --.- ..- .. -.-. -.- .-.. -.--   .--- .. -. -..- . -..   - .... .   --. -. --- -- . ...   -... . ..-. --- .-. .   - .... . -.--   ...- .- .--. --- .-. .. --.. . -.. .-.-.-";
-            var translator = new Translator(new MorseCodeToEnglish());
+            var translator = new Translator(new System.Collections.Generic.List<ILinguist> { new MorseCodeToEnglish(), new EnglishToMorseCode() });
 
             var result = translator.Translate(textToTranslate);
 
@@ -22,19 +22,7 @@ namespace EnglishClassroom.Core.Tests
         {
             var expected = "the  wizard quickly jinxed the gnomes before they vaporized.";
             var textToTranslate = "- .... .      .-- .. --.. .- .-. -..   --.- ..- .. -.-. -.- .-.. -.--   .--- .. -. -..- . -..   - .... .   --. -. --- -- . ...   -... . ..-. --- .-. .   - .... . -.--   ...- .- .--. --- .-. .. --.. . -.. .-.-.-";
-            var translator = new Translator(new MorseCodeToEnglish());
-
-            var result = translator.Translate(textToTranslate);
-
-            Assert.AreEqual(expected, result);
-        }
-
-        [TestMethod]
-        public void EnglishToMorseCodeWithInvalidTextToTranslateInput()
-        {
-            var expected = "Invalid Morse Code Or Spacing";
-            var textToTranslate = "";
-            var translator = new Translator(new EnglishToMorseCode());
+            var translator = new Translator(new System.Collections.Generic.List<ILinguist> { new MorseCodeToEnglish(), new EnglishToMorseCode() });
 
             var result = translator.Translate(textToTranslate);
 
@@ -46,7 +34,7 @@ namespace EnglishClassroom.Core.Tests
         {
             var expected = "- .... .   .-- .. --.. .- .-. -..   --.- ..- .. -.-. -.- .-.. -.--   .--- .. -. -..- . -..   - .... .   --. -. --- -- . ...   -... . ..-. --- .-. .   - .... . -.--   ...- .- .--. --- .-. .. --.. . -.. .-.-.-";
             var textToTranslate = "The wizard quickly jinxed the gnomes before they vaporized.";
-            var translator = new Translator(new EnglishToMorseCode());
+            var translator = new Translator(new System.Collections.Generic.List<ILinguist> { new MorseCodeToEnglish(), new EnglishToMorseCode() });
 
             var result = translator.Translate(textToTranslate);
 
@@ -58,7 +46,7 @@ namespace EnglishClassroom.Core.Tests
         {
             var expected = "- .... .      .-- .. --.. .- .-. -..   --.- ..- .. -.-. -.- .-.. -.--   .--- .. -. -..- . -..   - .... .   --. -. --- -- . ...   -... . ..-. --- .-. .   - .... . -.--   ...- .- .--. --- .-. .. --.. . -.. .-.-.-";
             var textToTranslate = "The  wizard quickly jinxed the gnomes before they vaporized.";
-            var translator = new Translator(new EnglishToMorseCode());
+            var translator = new Translator(new System.Collections.Generic.List<ILinguist> { new MorseCodeToEnglish(), new EnglishToMorseCode() });
 
             var result = translator.Translate(textToTranslate);
 
@@ -70,7 +58,19 @@ namespace EnglishClassroom.Core.Tests
         {
             var expected = "Invalid Morse Code Or Spacing";
             var textToTranslate = "..- .... ..-. .-.. --- .-    ...-";
-            var translator = new Translator(new MorseCodeToEnglish());
+            var translator = new Translator(new System.Collections.Generic.List<ILinguist> { new MorseCodeToEnglish(), new EnglishToMorseCode() });
+
+            var result = translator.Translate(textToTranslate);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void PassingEmptyStringToBeTranslated()
+        {
+            var expected = "Sorry, don't know this language";
+            var textToTranslate = "";
+            var translator = new Translator(new System.Collections.Generic.List<ILinguist> { new MorseCodeToEnglish(), new EnglishToMorseCode() });
 
             var result = translator.Translate(textToTranslate);
 

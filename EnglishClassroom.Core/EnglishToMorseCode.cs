@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace EnglishClassroom.Core
 {
@@ -27,6 +28,19 @@ namespace EnglishClassroom.Core
         public bool IsValid(string textToTranslate)
         {
             return !string.IsNullOrEmpty(textToTranslate);
+        }
+
+        public bool CanTranslateText(string textToTranslate)
+        {
+            var result = false;
+            if (!string.IsNullOrEmpty(textToTranslate))
+            {
+                var r = new Regex(@"^[a-zA-Z0-9\.\s]*$");
+                result = r.IsMatch(textToTranslate);
+            }
+            return result;
+
+
         }
     }
 }
